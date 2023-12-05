@@ -1,6 +1,7 @@
 .countries-table-container {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .countries-table {
@@ -27,6 +28,11 @@
   text-align: left;
   width: 200px;
   padding: 10px 15px;
+}
+
+.fetch-status-container {
+  position: absolute;
+  top: 30vh;
 }
 
 @media (max-width: 420px) {

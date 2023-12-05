@@ -1,4 +1,4 @@
-import React from 'react';
+import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { ApolloError, NetworkStatus } from '@apollo/client';
 import { CountriesFetchStatus } from 'components/CountriesFetchStatus/CountriesFetchStatus';
@@ -10,6 +10,7 @@ describe('CountriesFetchStatus', () => {
         networkStatus={NetworkStatus.ready}
         loading={true}
         error={undefined}
+        noResults={false}
       />
     );
     expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
@@ -25,6 +26,7 @@ describe('CountriesFetchStatus', () => {
         networkStatus={NetworkStatus.error}
         loading={false}
         error={testError}
+        noResults={false}
       />
     );
     expect(
@@ -38,19 +40,22 @@ describe('CountriesFetchStatus', () => {
         networkStatus={NetworkStatus.refetch}
         loading={false}
         error={undefined}
+        noResults={false}
       />
     );
     expect(screen.getByText(/Fetching!/i)).toBeInTheDocument();
   });
 
-  it('renders nothing when not loading, no error, and not refetching', () => {
-    const { container } = render(
+  it('renders "No results!" when not loading, no error, and not refetching', () => {
+    render(
       <CountriesFetchStatus
         networkStatus={NetworkStatus.ready}
         loading={false}
         error={undefined}
+        noResults={true}
       />
     );
-    expect(container.firstChild).toBeNull();
+
+    expect(screen.getByText('No results!')).toBeInTheDocument();
   });
 });

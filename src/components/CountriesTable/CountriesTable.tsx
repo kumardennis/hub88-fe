@@ -31,10 +31,13 @@ export const CountriesTable = ({
       <CountriesTableBody countries={countries} />
     </table>
 
-    <CountriesFetchStatus
-      loading={loading}
-      error={error}
-      networkStatus={networkStatus}
-    />
+    <div className="fetch-status-container">
+      <CountriesFetchStatus
+        loading={loading}
+        error={error}
+        networkStatus={networkStatus}
+        noResults={countries.length === 0}
+      />
+    </div>
   </div>
 );
