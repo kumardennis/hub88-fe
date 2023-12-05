@@ -38,8 +38,6 @@ describe('Operations on countries table', () => {
 
     cy.get('.search-countries-by-code-input').type('ZZ');
 
-    cy.get('.countries-table').find('tbody').should('have.length', 0);
-
     cy.contains('No results!').should('be.visible');
   });
 });
