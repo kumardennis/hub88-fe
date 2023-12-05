@@ -30,7 +30,7 @@ export const CountriesPage = (): JSX.Element => {
 
   const handleQueryChange = async (query: string) => {
     setQuery(query.toUpperCase());
-    debounceFetchCall(() => getCountries());
+    debounceFetchCall(async () => await getCountries());
   };
 
   return (

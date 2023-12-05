@@ -10,7 +10,7 @@
   },
   "overrides": [
     {
-      "files": ["cypress/**/*.ts", "cypress.config.ts"],
+      "files": ["cypress/**/*.ts", "cypress.config.ts", "jest.setup.ts"],
       "parserOptions": {
         "project": null // This tells ESLint not to use TypeScript ESLint parser for these files
       }
