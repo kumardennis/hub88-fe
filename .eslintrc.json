@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "prettier",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "project": "tsconfig.json"
+  },
+  "overrides": [
+    {
+      "files": ["cypress/**/*.ts", "cypress.config.ts"],
+      "parserOptions": {
+        "project": null // This tells ESLint not to use TypeScript ESLint parser for these files
+      }
+      // You can also specify different ESLint rules for Cypress files here
+    }
+    // ... other overrides ...
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"]
+}
