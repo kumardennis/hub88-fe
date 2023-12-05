@@ -28,13 +28,13 @@ export const CountriesTable = ({
     >
       <CountriesTableHeader handleQueryChange={handleQueryChange} />
 
-      <CountriesFetchStatus
-        loading={loading}
-        error={error}
-        networkStatus={networkStatus}
-      />
-
       <CountriesTableBody countries={countries} />
     </table>
+
+    <CountriesFetchStatus
+      loading={loading}
+      error={error}
+      networkStatus={networkStatus}
+    />
   </div>
 );
