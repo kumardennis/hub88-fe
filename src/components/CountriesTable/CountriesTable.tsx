@@ -4,10 +4,11 @@ import { ApolloError, NetworkStatus } from '@apollo/client';
 import { CountriesTableHeader } from 'components/CountriesTableHeader/CountriesTableHeader';
 import { CountriesTableBody } from 'components/CountriesTableBody/CountriesTableBody';
 import { CountriesFetchStatus } from 'components/CountriesFetchStatus/CountriesFetchStatus';
+import { DebouncedFunc } from 'cypress/types/lodash';
 
 type PropTypes = {
   countries: Country[];
-  handleQueryChange: (query: string) => Promise<void>;
+  handleQueryChange: DebouncedFunc<(query: string) => Promise<void>>;
   networkStatus: NetworkStatus;
   loading: boolean;
   error: ApolloError | undefined;

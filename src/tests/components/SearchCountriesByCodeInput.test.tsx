@@ -2,15 +2,18 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SearchCountriesByCodeInput } from 'components/SearchCountriesByCodeInput/SearchCountriesByCodeInput';
+import { DebouncedFunc } from 'cypress/types/lodash';
+
+jest.useFakeTimers();
 
 describe('SearchCountriesByCodeInput', () => {
   it('renders correctly with initial query', () => {
+    const handleQueryChangeMock = jest.fn() as unknown as DebouncedFunc<
+      (query: string) => Promise<void>
+    >;
+
     render(
-      <SearchCountriesByCodeInput
-        handleQueryChange={async () => {
-          return;
-        }}
-      />
+      <SearchCountriesByCodeInput handleQueryChange={handleQueryChangeMock} />
     );
     const inputElement = screen.getByRole('search-countries-by-code');
     expect(inputElement).toBeInTheDocument();
@@ -21,7 +24,9 @@ describe('SearchCountriesByCodeInput', () => {
   });
 
   it('calls handleQueryChange on input change', async () => {
-    const handleQueryChangeMock = jest.fn();
+    const handleQueryChangeMock = jest.fn() as unknown as DebouncedFunc<
+      (query: string) => Promise<void>
+    >;
     render(
       <SearchCountriesByCodeInput handleQueryChange={handleQueryChangeMock} />
     );
@@ -33,7 +38,9 @@ describe('SearchCountriesByCodeInput', () => {
   });
 
   it('respects maxLength property', async () => {
-    const handleQueryChangeMock = jest.fn();
+    const handleQueryChangeMock = jest.fn() as unknown as DebouncedFunc<
+      (query: string) => Promise<void>
+    >;
 
     render(
       <SearchCountriesByCodeInput handleQueryChange={handleQueryChangeMock} />

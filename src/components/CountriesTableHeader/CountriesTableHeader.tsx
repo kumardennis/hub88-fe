@@ -1,7 +1,8 @@
 import { SearchCountriesByCodeInput } from 'components/SearchCountriesByCodeInput/SearchCountriesByCodeInput';
+import { DebouncedFunc } from 'cypress/types/lodash';
 
 type PropTypes = {
-  handleQueryChange: (query: string) => Promise<void>;
+  handleQueryChange: DebouncedFunc<(query: string) => Promise<void>>;
 };
 
 export const CountriesTableHeader = ({ handleQueryChange }: PropTypes) => (

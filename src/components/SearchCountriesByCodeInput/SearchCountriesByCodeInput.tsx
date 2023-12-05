@@ -1,8 +1,9 @@
 import { useRef } from 'react';
 import './styles.css';
+import { DebouncedFunc } from 'cypress/types/lodash';
 
 type PropTypes = {
-  handleQueryChange: (query: string) => Promise<void>;
+  handleQueryChange: DebouncedFunc<(query: string) => Promise<void>>;
 };
 
 export const SearchCountriesByCodeInput = ({

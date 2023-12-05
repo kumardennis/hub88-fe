@@ -1,10 +1,10 @@
 import { useLazyQuery } from '@apollo/client';
 import { GET_COUNTRIES } from 'graphql/queries/countriesQuery';
 import { CountriesData, CountriesVars } from 'graphql/types';
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy, useCallback, useState } from 'react';
 import { useFetchInitialCountries } from 'hooks/useFetchInitialCountries';
-import { debounceFetchCall } from 'utils/debounceFetchCall';
 import { TIME_CONST } from 'utils/constants';
+import debounce from 'lodash.debounce';
 
 const CountriesTable = lazy(() =>
   import('components/CountriesTable/CountriesTable').then((module) => ({
@@ -28,10 +28,15 @@ export const CountriesPage = (): JSX.Element => {
 
   useFetchInitialCountries(getCountries);
 
-  const handleQueryChange = async (query: string) => {
+  const getFilteredCountries = async (query: string) => {
     setQuery(query.toUpperCase());
-    debounceFetchCall(async () => await getCountries());
+    await getCountries();
   };
+
+  const debouncedGetCountries = useCallback(
+    debounce(getFilteredCountries, 400),
+    []
+  );
 
   return (
     <Suspense fallback={<div>Loading countries...</div>}>
@@ -39,7 +44,7 @@ export const CountriesPage = (): JSX.Element => {
         loading={loading}
         error={error}
         networkStatus={networkStatus}
-        handleQueryChange={handleQueryChange}
+        handleQueryChange={debouncedGetCountries}
         countries={data?.countries || []}
       />
     </Suspense>
